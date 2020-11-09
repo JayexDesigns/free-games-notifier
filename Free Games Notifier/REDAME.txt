@@ -1,0 +1,20 @@
+Hola, Gracias por descargar mi aplicación :D
+
+Para que funcione correctamente lo único que se tiene que hacer es ejecutar el archivo Main.exe
+Todos los archivos menos este documento son esenciales, puedes mover la carpeta que contiene todo pero no modificar el contenido de ninguna forma si lo que quieres es que funcione correctamente.
+
+Al ejecutar el archivo Main.exe se abrirá la interfaz de la aplicación la cual muestra de un lado el botón que hará que el programa empiece a buscar los juegos que están gratuitos ahora mismo, el botón que hace que el programa se ejecute al iniciar el ordenador no funciona de momento pero estoy trabajando en ello. Del otro lado hay un botón que te lleva a la lista completa de juegos gratuitos y un botón que actualiza la lista de abajo donde se muestran los últimos 5 juegos que se ha encontrado que están gratuitos, si pulsas un elemento de esa lista te llevará a la web donde te explica como descargarlo.
+
+Si le das al botón "Start" y cierras la interfaz el programa seguirá corriendo y notificando de todos los juegos que encuentre hasta que se vuelva a abrir la interfaz y se presione el botón "Stop".
+
+Gracias por la atención.
+
+
+
+Mis Redes:
+Discord: Jayex Designs#4209
+Instagram: jayex_photo
+Youtube: Jayex Designs
+Twitch: Jayex_Designs
+Twitter: Jayex_Designs
+Web: jayexdesigns.github.io
