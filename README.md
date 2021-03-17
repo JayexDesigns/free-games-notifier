@@ -1,4 +1,4 @@
-# Free Games Notifier
+# Free Games Notifier (Currently Not Working)
 An app I made for windows to get notified when there is a new free game available
 
 # User Use
