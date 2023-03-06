@@ -1,0 +1,54 @@
+@font-face {
+	font-family: "Manrope";
+	src: url("/fonts/Manrope.ttf") format("truetype");
+}
+
+:root {
+	--foreground-color: #111111;
+	--dimmed-foreground-color: #bbbbbb;
+	--background-color: #ffffff;
+	--shadow-color: #00000066;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--foreground-color: #ffffff;
+		--background-color: #111111;
+		--dimmed-foreground-color: #777777;
+	}
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Manrope", sans-serif;
+	color: var(--foreground-color);
+}
+
+body {
+	background-color: var(--background-color);
+}
+
+*:focus {
+	outline: none;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: var(--background-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background-color: var(--foreground-color);
+	transition: all 1s ease-in-out;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background-color: #dddddd;
+}

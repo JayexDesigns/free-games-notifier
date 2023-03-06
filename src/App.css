@@ -1,0 +1,77 @@
+.app {
+	min-height: 100vh;
+}
+
+.notifications {
+	padding: 2rem 4rem;
+	min-height: calc(100vh - 100px);
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 3rem;
+}
+
+.header button {
+	background-color: transparent;
+	border: none;
+	color: var(--text-color);
+	cursor: pointer;
+}
+
+.header button svg {
+	transform-origin: center;
+	transition: all 0.25s ease-in-out;
+	width: 2rem;
+	height: 2rem;
+}
+
+.header button svg:hover {
+	transform: rotate(90deg) scale(1.2);
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+}
+
+.app footer {
+	width: 100%;
+	height: 100px;
+	background-color: var(--background-color);
+	border-top: 1px solid var(--foreground-color);
+	padding: 0 4rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.app footer p,
+.app footer a {
+	color: #777777;
+}
+
+.button {
+	font-size: 1rem;
+	font-weight: 700;
+	background-color: var(--background-color);
+	color: var(--foreground-color);
+	border: 1px solid var(--foreground-color);
+	padding: 0.75rem 1.5rem;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 0.15s ease-in-out;
+}
+
+.button:hover {
+	background-color: var(--foreground-color);
+	color: var(--background-color);
+	border: 1px solid var(--background-color);
+}
