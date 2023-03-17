@@ -60,7 +60,12 @@ fn get_games(connection: &Connection) -> Vec<Game> {
 		games.push(game.unwrap());
 	}
 
+	games.reverse();
 	games
+}
+
+fn delete_game(connection: &Connection, id: &str) {
+	connection.execute("DELETE FROM games WHERE id = ?1", (id,)).unwrap();
 }
 
 fn change_viewed(connection: &Connection, id: &str, viewed: bool) {
@@ -123,7 +128,9 @@ fn main() {
 				reqwest::StatusCode::OK => {
 					let selector = Selector::parse(".tdb_module_loop > div > div:nth-child(2) h3 a").unwrap();
 					let document = Html::parse_document(&response.text().await.unwrap());
-					let mut updated = false;
+
+					let games_list = get_games(&connection);
+					let mut elements_list: Vec<Game> = vec![];
 					for element in document.select(&selector) {
 						let game = Game {
 							id: Uuid::new_v4().to_string(),
@@ -131,14 +138,25 @@ fn main() {
 							url: element.attr("href").unwrap().to_string(),
 							viewed: false
 						};
+						elements_list.push(game);
+					}
 
-						let games_list = get_games(&connection);
-						if games_list.iter().any(|i| i.url == game.url) {
+					let mut updated = false;
+					for element in elements_list.iter().rev() {
+						if games_list.iter().any(|i| i.url == element.url) {
 							continue;
 						}
-						add_game(&connection, &game);
+						add_game(&connection, &element);
 						updated = true;
 					}
+					for game in &games_list {
+						if elements_list.iter().any(|i| i.url == game.url) {
+							continue;
+						}
+						delete_game(&connection, &game.id);
+						updated = true;
+					}
+
 					if updated {
 						sender_clone.send(Event {name: "get_list", payload: String::from("")}).unwrap();
 						sender_clone.send(Event {name: "notificate", payload: serde_json::to_string(&NotificationPayload {
@@ -149,7 +167,7 @@ fn main() {
 				}
 				_ => {}
 			}
-			std::thread::sleep(std::time::Duration::from_secs(60 * 10));
+			std::thread::sleep(std::time::Duration::from_secs(60 * 5));
 		}
 	});
 
