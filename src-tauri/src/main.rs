@@ -1,7 +1,14 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::sync::{mpsc, Arc};
-use tauri::{AppHandle, Manager};
+use tauri::{
+	AppHandle,
+	Manager,
+	SystemTray,
+	CustomMenuItem,
+	SystemTrayMenu,
+	SystemTrayEvent,
+};
 use serde::{Serialize, Deserialize};
 use scraper::{Html, Selector};
 use rusqlite::Connection;
@@ -84,7 +91,42 @@ fn main() {
 		)
 	", ()).unwrap();
 
+	let exit = CustomMenuItem::new("exit".to_string(), "Exit");
+	let tray_menu = SystemTrayMenu::new().add_item(exit);
+	let tray = SystemTray::new().with_menu(tray_menu);
+
 	let app = tauri::Builder::default()
+		.on_window_event(|event| {
+			match event.event() {
+				tauri::WindowEvent::CloseRequested { api, .. } => {
+					event.window().hide().unwrap();
+					api.prevent_close();
+				}
+				_ => {}
+			}
+		})
+		.system_tray(tray)
+		.on_system_tray_event(|app, event| match event {
+			SystemTrayEvent::LeftClick {position: _, size: _, ..} => {
+				let window = app.get_window("main").unwrap();
+				if window.is_visible().unwrap() {
+					window.hide().unwrap();
+				}
+				else {
+					window.show().unwrap();
+					window.set_focus().unwrap();
+				}
+			}
+			SystemTrayEvent::MenuItemClick {id, ..} => {
+				match id.as_str() {
+					"exit" => {
+						std::process::exit(0);
+					}
+					_ => {}
+				}
+			}
+			_ => {}
+		})
 		.build(tauri::generate_context!())
 		.expect("failed to run app");
 
@@ -171,5 +213,10 @@ fn main() {
 		}
 	});
 
-	app.run(|_, _| ());
+	app.run(|_app_handle, event| match event {
+		tauri::RunEvent::ExitRequested { api, .. } => {
+			api.prevent_exit();
+		}
+		_ => {}
+	});
 }
