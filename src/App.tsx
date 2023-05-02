@@ -34,7 +34,7 @@ function App() {
 			if (permissionGranted) {
 				await listen("notificate", ({payload}) => {
 					let {title, body} = payload as Notification;
-					sendNotification({title, body});
+					sendNotification({title, body, icon: "/icons/icon.png", sound: "default"});
 				});
 			}
 
