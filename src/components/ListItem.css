@@ -63,3 +63,8 @@
 .viewed .listItemData h3 {
 	color: var(--dimmed-foreground-color);
 }
+
+.listItemControls .openWebsite {
+	border-color: var(--primary-color);
+	color: var(--primary-color);
+}

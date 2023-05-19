@@ -27,7 +27,7 @@ function ListItem({id, title, url, initialViewed}: ListItemProps) {
 				<button className="button" onClick={() => changeViewed(!viewed)}>
 					Set as {viewed ? "not" : ""} seen
 				</button>
-				<a className="button" href={url as string} target="_blank" rel="noreferrer" onClick={() => changeViewed(true)}>
+				<a className="button openWebsite" href={url as string} target="_blank" rel="noreferrer" onClick={() => changeViewed(true)}>
 					Open website
 				</a>
 			</div>

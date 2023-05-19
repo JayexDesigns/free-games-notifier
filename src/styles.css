@@ -4,6 +4,7 @@
 }
 
 :root {
+	--primary-color: #f72585;
 	--foreground-color: #111111;
 	--dimmed-foreground-color: #bbbbbb;
 	--background-color: #ffffff;
