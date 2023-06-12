@@ -1,8 +1,14 @@
-# Free Games Notifier
-An app I made for windows to get notified when there is a new free game available
+<h3 align="center"><img src="./src-tauri/icons/icon.png" width="10%"></h3>
+<h1 align="center">Free Games Notifier</h1>
+<p align="center">Desktop app that notifies you when a free game is available</p>
+<br/>
+<h2>Installation</h2>
+<p>Download the <a href="https://github.com/JayexDesigns/free-games-notifier/releases/">latest release</a> for your platform or compile the source code from the root folder with the build command if <a href="https://nodejs.org/">Node.js</a> and <a href="https://www.rust-lang.org/">Rust</a> are installed.</p>
 
-# User Use
-For normal user use, you only have to execute the main.exe file and it will appear an interface showing the start button, the last 5 free games available, a button to show all the games and an update button. The startup checkbox has no use for now as it's a work in progress functionality.
+```bash
+npm run tauri build
+```
 
-# For Developers
-To anyone who wants to see the code, I have to warn you that I made this a long time ago and that not only I didn't know how to do things properly but also some libraries are not currently working such as win10toast.
+<h2>Use</h2>
+<p>Once installed, you just have to open the application, it will start working in the background and notify you when a game is available for free. Closing the application will keep it running in the background, to really finish its execution you can press the "Exit" button in the system tray menu or within the application press the gear icon and select "Exit".</p>
+<img src="./screenshot.png">
