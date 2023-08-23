@@ -19,6 +19,10 @@
 	color: var(--primary-color);
 }
 
+.header > div {
+	position: relative;
+}
+
 .header button {
 	background-color: transparent;
 	border: none;
@@ -34,6 +38,67 @@
 
 .header button svg:hover {
 	transform: rotate(90deg) scale(1.2);
+}
+
+.settings {
+	position: absolute;
+	background-color: var(--foreground-color);
+	transition: opacity 0.25s ease-in-out;
+	width: 200px;
+	padding: 0.5rem;
+	border-radius: 5px;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+	gap: 10px;
+}
+
+.settings.show {
+	opacity: 1;
+}
+
+.settings.hide {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.settings > label,
+.settings > button {
+	color: var(--background-color);
+	padding: 0.5rem;
+	border-radius: 5px;
+	width: 100%;
+	transition: background-color 0.15s ease-in-out;
+}
+
+.settings > label:hover,
+.settings > button:hover {
+	background-color: var(--dimmed-1-foreground-color);
+}
+
+.settings label {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	cursor: pointer;
+}
+
+.settings label input {
+	margin-right: 10px;
+}
+
+.settings button {
+	font-size: 1rem;
+	text-align: start;
+}
+
+.settings hr {
+	width: 100%;
+	height: 1px;
+	background-color: var(--background-color);
+	border: none;
 }
 
 .list {

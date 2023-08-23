@@ -6,7 +6,8 @@
 :root {
 	--primary-color: #f72585;
 	--foreground-color: #111111;
-	--dimmed-foreground-color: #bbbbbb;
+	--dimmed-1-foreground-color: #333333;
+	--dimmed-2-foreground-color: #bbbbbb;
 	--background-color: #ffffff;
 	--shadow-color: #00000066;
 }
@@ -14,8 +15,9 @@
 @media (prefers-color-scheme: dark) {
 	:root {
 		--foreground-color: #ffffff;
+		--dimmed-1-foreground-color: #dddddd;
+		--dimmed-2-foreground-color: #777777;
 		--background-color: #111111;
-		--dimmed-foreground-color: #777777;
 	}
 }
 
@@ -51,5 +53,5 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background-color: #dddddd;
+	background-color: var(--dimmed-1-foreground-color);
 }

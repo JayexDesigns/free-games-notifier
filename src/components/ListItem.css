@@ -16,7 +16,7 @@
 }
 
 .viewed {
-	border-color: var(--dimmed-foreground-color);
+	border-color: var(--dimmed-2-foreground-color);
 }
 
 .listItemData {
@@ -50,7 +50,7 @@
 }
 
 .viewed .listItemData h2 {
-	color: var(--dimmed-foreground-color);
+	color: var(--dimmed-2-foreground-color);
 	text-decoration: line-through;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .viewed .listItemData h3 {
-	color: var(--dimmed-foreground-color);
+	color: var(--dimmed-2-foreground-color);
 }
 
 .listItemControls .openWebsite {

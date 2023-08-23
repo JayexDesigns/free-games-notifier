@@ -19,6 +19,7 @@ type Notification = {
 
 function App() {
 	const [gamesList, setGamesList] = useState<Array<Game>>([]);
+	const [settingsOpened, setSettingsOpened] = useState(false);
 
 	useEffect(() => {
 		const initializeListeners = async () => {
@@ -48,9 +49,19 @@ function App() {
 			<section className="notifications">
 				<div className="header">
 					<h1>Notification List</h1>
-					<button>
-						<SettingsIcon />
-					</button>
+					<div>
+						<button onClick={() => setSettingsOpened(prev => !prev)}>
+							<SettingsIcon />
+						</button>
+						<div className={`settings ${settingsOpened ? "show" : "hide"}`}>
+							<label>
+								<input type="checkbox" />
+								Start on startup
+							</label>
+							<hr />
+							<button>Exit</button>
+						</div>
+					</div>
 				</div>
 				<ul className="list">
 					{gamesList.map(game => (
