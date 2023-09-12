@@ -59,7 +59,7 @@ function App() {
 								Start on startup
 							</label>
 							<hr />
-							<button>Exit</button>
+							<button onClick={() => emit("exit")}>Exit</button>
 						</div>
 					</div>
 				</div>

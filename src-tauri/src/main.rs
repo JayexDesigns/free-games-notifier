@@ -1,6 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::sync::{mpsc, Arc};
+use std::process;
 use tauri::{
 	AppHandle,
 	Manager,
@@ -120,7 +121,7 @@ fn main() {
 			SystemTrayEvent::MenuItemClick {id, ..} => {
 				match id.as_str() {
 					"exit" => {
-						std::process::exit(0);
+						process::exit(0);
 					}
 					_ => {}
 				}
@@ -145,6 +146,9 @@ fn main() {
 				let payload = serde_json::from_str::<ChangeViewedPayload>(&event.payload).unwrap();
 				change_viewed(&connection, &payload.id, payload.viewed);
 			}
+			if event.name == "exit" {
+				process::exit(0);
+			}
 		}
 	});
 
@@ -158,6 +162,11 @@ fn main() {
 		if let Some(payload) = event.payload() {
 			sender_clone.send(Event {name: "change_viewed", payload: payload.to_string()}).unwrap();
 		}
+	});
+
+	let sender_clone = sender.clone();
+	app.listen_global("exit", move |_event| {
+		sender_clone.send(Event {name: "exit", payload: String::from("")}).unwrap();
 	});
 
 	let sender_clone = sender.clone();
