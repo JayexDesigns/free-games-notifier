@@ -78,6 +78,12 @@
 	background-color: var(--dimmed-1-foreground-color);
 }
 
+.settings > label::selection,
+.settings > button::selection {
+	color: var(--foreground-color);
+	background-color: var(--background-color);
+}
+
 .settings label {
 	display: flex;
 	flex-direction: row;
