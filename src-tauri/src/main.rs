@@ -80,6 +80,13 @@ fn change_viewed(connection: &Connection, id: &str, viewed: bool) {
 	connection.execute("UPDATE games SET viewed = ?1 WHERE id = ?2", (&viewed, id)).unwrap();
 }
 
+
+#[derive(Clone, Serialize)]
+struct Payload {
+	args: Vec<String>,
+	cwd: String,
+}
+
 fn main() {
 	let connection = Connection::open("games.db").unwrap();
 
@@ -97,9 +104,18 @@ fn main() {
 	let tray = SystemTray::new().with_menu(tray_menu);
 
 	let app = tauri::Builder::default()
+		.plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+			println!("{}, {argv:?}, {cwd}", app.package_info().name);
+			app.emit_all("single-instance", Payload {args: argv, cwd}).unwrap();
+			let window = app.get_window("main").unwrap();
+			if !window.is_visible().unwrap() {
+				window.show().unwrap();
+				window.set_focus().unwrap();
+			}
+		}))
 		.on_window_event(|event| {
 			match event.event() {
-				tauri::WindowEvent::CloseRequested { api, .. } => {
+				tauri::WindowEvent::CloseRequested {api, ..} => {
 					event.window().hide().unwrap();
 					api.prevent_close();
 				}
