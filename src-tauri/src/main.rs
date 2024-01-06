@@ -20,6 +20,12 @@ struct Event {
 	payload: String,
 }
 
+#[derive(Clone, Serialize)]
+struct SingleInstancePayload {
+	args: Vec<String>,
+	cwd: String,
+}
+
 #[derive(Debug, Serialize, Deserialize)]
 struct NotificationPayload {
 	title: String,
@@ -80,13 +86,6 @@ fn change_viewed(connection: &Connection, id: &str, viewed: bool) {
 	connection.execute("UPDATE games SET viewed = ?1 WHERE id = ?2", (&viewed, id)).unwrap();
 }
 
-
-#[derive(Clone, Serialize)]
-struct Payload {
-	args: Vec<String>,
-	cwd: String,
-}
-
 fn main() {
 	let connection = Connection::open("games.db").unwrap();
 
@@ -105,8 +104,7 @@ fn main() {
 
 	let app = tauri::Builder::default()
 		.plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
-			println!("{}, {argv:?}, {cwd}", app.package_info().name);
-			app.emit_all("single-instance", Payload {args: argv, cwd}).unwrap();
+			app.emit_all("single-instance", SingleInstancePayload {args: argv, cwd}).unwrap();
 			let window = app.get_window("main").unwrap();
 			if !window.is_visible().unwrap() {
 				window.show().unwrap();
